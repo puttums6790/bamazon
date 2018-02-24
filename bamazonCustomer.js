@@ -11,7 +11,16 @@ var connection = mysql.createConnection({
     database: 'bamazon'
 });
 
-
+connection.connect(function(err) {
+  if (err) throw err;
+  showprod();
+});
+function showprod() {
+connection.query("SELECT * FROM products", function (err, result) {
+    if (err) throw err;
+    console.table(result);
+  });
+};
 
 //prompt asks for id and quantity
 inquirer.prompt([{
